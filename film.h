@@ -31,6 +31,8 @@ public:
 
     String getKategoria() const { return kategoria; }
 
+    virtual std::ostream& formazottKiir(std::ostream& out) const;
+
     virtual std::ostream& kiir(std::ostream& out) const;
 
     //virtual ~Film();
@@ -47,6 +49,8 @@ public:
 
     String getLeiras() const { return leiras;}
 
+    std::ostream& formazottKiir(std::ostream& out) const;
+
     std::ostream& kiir(std::ostream& out) const;
 
     //~DokumentumFilm();
@@ -59,7 +63,9 @@ public:
     CsaladiFilm(unsigned int cid, String ccim, unsigned int clejatszIdo, unsigned int ckiadEv,\
     String ckategoria, unsigned int ckorhatar) : Film(cid, ccim, clejatszIdo, ckiadEv, ckategoria), korhatar(ckorhatar){}
 
-    String getKorhatar() const { return korhatar; }
+    unsigned int getKorhatar() const { return korhatar; }
+
+    std::ostream& formazottKiir(std::ostream& out) const;
 
     std::ostream& kiir(std::ostream& out) const;
 

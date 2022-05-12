@@ -29,31 +29,28 @@ void FilmTar::adatbazisBeolvas(const char *fajlNev){
         myFile >> lejatszIdo;
         myFile >> kiadEv;
         myFile >> kategoria;
-        if (kategoria == "Dokumentum film"){
+        if (kategoria == "Dokumentumfilm"){
             myFile >> leiras;
             DokumentumFilm* hozzaadando = new DokumentumFilm (id, filmCim, lejatszIdo, kiadEv, kategoria, leiras);
             adatbazisHozzaad(hozzaadando);
         }
-        else if (kategoria == "Csaladi film"){
+        else if (kategoria == "Csaladifilm"){
             myFile >> korhatar;
             CsaladiFilm* hozzaadando = new CsaladiFilm (id, filmCim, lejatszIdo, kiadEv, kategoria, korhatar);
             adatbazisHozzaad(hozzaadando);
         }
-        myFile >> filmCim; //hogy a sortoreseket is beolvassa, es utana egybol az uj adattal kezdje
     }
     myFile.close();
 }
 
 void FilmTar::adatbazisHozzaad(Film *ujFilm) {
     Film** ujFilmLista = new Film*[meret+1];
-    for (int i = 0; i < meret; ++i) {
-        *ujFilmLista[i] = *filmLista[i];
-        delete filmLista[i];
+    for (unsigned int i = 0; i < meret; ++i) {
+        ujFilmLista[i] = filmLista[i];
     }
     delete[] filmLista;
-    meret++;
-    *ujFilmLista[meret] = *ujFilm;
-    *filmLista = *ujFilmLista;
+    ujFilmLista[meret++] = ujFilm;
+    filmLista = ujFilmLista;
 }
 
 void FilmTar::adatbazisTorol(String& torlendoFilm){

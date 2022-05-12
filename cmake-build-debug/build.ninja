@@ -73,12 +73,6 @@ build CMakeFiles/Skeleton.dir/film.cpp.obj: CXX_COMPILER__Skeleton_Debug D$:/Egy
   OBJECT_DIR = CMakeFiles\Skeleton.dir
   OBJECT_FILE_DIR = CMakeFiles\Skeleton.dir
 
-build CMakeFiles/Skeleton.dir/menu.cpp.obj: CXX_COMPILER__Skeleton_Debug D$:/Egyetem/Prog2/NHF/Skeleton/menu.cpp || cmake_object_order_depends_target_Skeleton
-  DEP_FILE = CMakeFiles\Skeleton.dir\menu.cpp.obj.d
-  FLAGS = -g -std=gnu++11
-  OBJECT_DIR = CMakeFiles\Skeleton.dir
-  OBJECT_FILE_DIR = CMakeFiles\Skeleton.dir
-
 
 # =============================================================================
 # Link build statements for EXECUTABLE target Skeleton
@@ -87,7 +81,7 @@ build CMakeFiles/Skeleton.dir/menu.cpp.obj: CXX_COMPILER__Skeleton_Debug D$:/Egy
 #############################################
 # Link the executable Skeleton.exe
 
-build Skeleton.exe: CXX_EXECUTABLE_LINKER__Skeleton_Debug CMakeFiles/Skeleton.dir/main.cpp.obj CMakeFiles/Skeleton.dir/string5.cpp.obj CMakeFiles/Skeleton.dir/filmtar.cpp.obj CMakeFiles/Skeleton.dir/film.cpp.obj CMakeFiles/Skeleton.dir/menu.cpp.obj
+build Skeleton.exe: CXX_EXECUTABLE_LINKER__Skeleton_Debug CMakeFiles/Skeleton.dir/main.cpp.obj CMakeFiles/Skeleton.dir/string5.cpp.obj CMakeFiles/Skeleton.dir/filmtar.cpp.obj CMakeFiles/Skeleton.dir/film.cpp.obj
   FLAGS = -g
   LINK_LIBRARIES = -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
   OBJECT_DIR = CMakeFiles\Skeleton.dir
