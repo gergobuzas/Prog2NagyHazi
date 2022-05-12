@@ -5,6 +5,7 @@
 #include "film.h"
 #include "string5.h"
 
+
 #ifndef SKELETON_FILMTAR_H
 #define SKELETON_FILMTAR_H
 
@@ -15,17 +16,18 @@ private:
 public:
     FilmTar() = default;
 
-    unsigned int getMeret(){ return meret;}
+    unsigned int getMeret() const{ return meret;}
+
 
     Film** getFilmLista() {return filmLista;}
 
-    void adatbazisBeolvas(String fajlNev);
+    void adatbazisBeolvas(const char *fajlNev);
 
     void adatbazisHozzaad(Film* ujFilm);
 
-    void adatbazisTorol(String torlendoFilm);
+    void adatbazisTorol(String& torlendoFilm);
 
-    void adatbazisMentes(String fajlNev);
+    void adatbazisMentes(const char *fajlNev);
 
     void osszesKiir();
 

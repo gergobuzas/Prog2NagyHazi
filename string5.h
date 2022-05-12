@@ -127,6 +127,9 @@ public:
     /// Destruktor (disposeString)
     ~String() { delete[] pData; }
 
+
+
+
     /// Egyéb tagfüggvények:
     /// Kiírunk egy Stringet (debug célokra) (ez kész)
     /// Elötte kiírunk egy tetszőleges szöveget.
@@ -146,6 +149,31 @@ public:
         *this = *this + rhs_s;
         return *this;
     }
+
+    bool operator==(const String& rhs_s) {
+        if (len == rhs_s.size()){
+            for (int i = 0; i < len; ++i) {
+                if (pData[i] != rhs_s[i]){
+                    return false;
+                }
+            }
+            return true;
+        }
+        return false;
+    }
+
+    bool operator!=(const String& rhs_s) {
+        if (len == rhs_s.size()){
+            for (int i = 0; i < len; ++i) {
+                if (pData[i] == rhs_s[i]){
+                    return false;
+                }
+            }
+            return true;
+        }
+        return true;
+    }
+
 
     /// Két Stringet összefűz (concatString)
     /// @param rhs_s - jobboldali String
@@ -192,6 +220,7 @@ std::ostream& operator<<(std::ostream& os, const String& s0);
 /// Vigyázat nem tagfüggvény! Nem is tűnik el az s0 !
 /// Nem kell, hogy barát legyen mert van Str + ch
 std::istream& operator>>(std::istream& is, String& s0);
+
 
 /// String operator+(char ch, const String& str);
 /// Vagy inline, vagy nem itt a helye!

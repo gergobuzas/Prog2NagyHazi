@@ -25,7 +25,7 @@ public:
 
     void adatbazisTorol(String torlendoFilm);
 
-    void adatbazisMentes(String fajlNev);
+    void adatbazisMentes();
 
     void osszesKiir();
 

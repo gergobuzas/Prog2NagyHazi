@@ -8,7 +8,6 @@ mem_dump:   2016.
 inclue-ok:  2017., 2018., 2019., 2021. 
 *********************************/
 
-#define MEMTRACE
 
 #ifndef MEMTRACE_H
 #define MEMTRACE_H

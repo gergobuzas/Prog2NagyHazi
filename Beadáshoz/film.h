@@ -21,15 +21,15 @@ public:
     Film(unsigned int cid, String ccim, unsigned int clejatszIdo, unsigned int ckiadEv,\
     String ckategoria): id(cid), cim(ccim), lejatszIdo(clejatszIdo), kiadEv(ckiadEv), kategoria(ckategoria){}
 
-    unsigned int getId();
+    unsigned int getId() const;
 
-    String getCim();
+    String getCim() const;
 
-    unsigned int getLejatszIdo();
+    unsigned int getLejatszIdo() const;
 
     unsigned int getkiadEv();
 
-    String getKategoria();
+    String getKategoria() const;
 
     virtual void kiir() = 0;
 
@@ -45,7 +45,7 @@ public:
     DokumentumFilm(unsigned int cid, String ccim, unsigned int clejatszIdo, unsigned int ckiadEv,\
     String ckategoria, String cleiras) : Film(cid, ccim, clejatszIdo, ckiadEv, ckategoria), leiras(cleiras){}
 
-    String getLeiras();
+    String getLeiras() const;
 
     void kiir();
 
@@ -59,7 +59,7 @@ public:
     CsaladiFilm(unsigned int cid, String ccim, unsigned int clejatszIdo, unsigned int ckiadEv,\
     String ckategoria, unsigned int ckorhatar) : Film(cid, ccim, clejatszIdo, ckiadEv, ckategoria), korhatar(ckorhatar){}
 
-    String getLeiras();
+    String getLeiras() const;
 
     void kiir();
 

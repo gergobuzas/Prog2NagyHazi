@@ -21,19 +21,19 @@ public:
     Film(unsigned int cid, String ccim, unsigned int clejatszIdo, unsigned int ckiadEv,\
     String ckategoria): id(cid), cim(ccim), lejatszIdo(clejatszIdo), kiadEv(ckiadEv), kategoria(ckategoria){}
 
-    unsigned int getId();
+    unsigned int getId() const{ return id; }
 
-    String getCim();
+    String getCim() const { return cim; }
 
-    unsigned int getLejatszIdo();
+    unsigned int getLejatszIdo() const { return lejatszIdo;}
 
-    unsigned int getkiadEv();
+    unsigned int getkiadEv() const { return kiadEv; }
 
-    String getKategoria();
+    String getKategoria() const { return kategoria; }
 
-    virtual void kiir() = 0;
+    virtual std::ostream& kiir(std::ostream& out) const;
 
-    virtual ~Film();
+    //virtual ~Film();
 
 };
 
@@ -45,11 +45,11 @@ public:
     DokumentumFilm(unsigned int cid, String ccim, unsigned int clejatszIdo, unsigned int ckiadEv,\
     String ckategoria, String cleiras) : Film(cid, ccim, clejatszIdo, ckiadEv, ckategoria), leiras(cleiras){}
 
-    String getLeiras();
+    String getLeiras() const { return leiras;}
 
-    void kiir();
+    std::ostream& kiir(std::ostream& out) const;
 
-    ~DokumentumFilm();
+    //~DokumentumFilm();
 };
 
 class CsaladiFilm: public Film{
@@ -59,11 +59,11 @@ public:
     CsaladiFilm(unsigned int cid, String ccim, unsigned int clejatszIdo, unsigned int ckiadEv,\
     String ckategoria, unsigned int ckorhatar) : Film(cid, ccim, clejatszIdo, ckiadEv, ckategoria), korhatar(ckorhatar){}
 
-    String getLeiras();
+    String getKorhatar() const { return korhatar; }
 
-    void kiir();
+    std::ostream& kiir(std::ostream& out) const;
 
-    ~CsaladiFilm();
+    //~CsaladiFilm();
 };
 
 #endif //SKELETON_FILM_H
