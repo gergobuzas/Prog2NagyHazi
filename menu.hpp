@@ -1,7 +1,13 @@
-
-//
-// Created by buzas on 2022. 05. 12..
-//
+/**
+ * @file menu.hpp
+ * @author Gergo Buzas (buzasgergo0615@gmail.com)
+ * @brief The "GUI" of the program. This handles the console text and the input-outputs
+ * @version 0.1
+ * @date 2022-05-13
+ * 
+ * @copyright Copyright (c) 2022
+ * 
+ */
 #include <iostream>
 #include "conio.h"
 #include "string5.h"
@@ -25,18 +31,32 @@ void clear() {
 #endif
 }
 
+/**
+ * @brief Handles the whole interface (text/console-based) and the input + outputs of the 
+ * 
+ * @param filmtomb 
+ */
 void menu(FilmTar &filmtomb) {
-    //Uj film hozzaadasahoz valtozok
+    /**
+     * @brief Variables for the "Add a new Film" (adatbazisHozzaad) function of FilmTar
+     * 
+     */
     unsigned int lejatszIdo, kiadEv, kategoria, korhatar;
     String cim(""), leiras("");
 
     char input;
 
-    //Film torlesehez valtozok
+    /**
+     * @brief Variables for the "Remove a Film" (adatbazisTorol) function of FilmTar
+     * 
+     */
     String torlendo("");
     bool talalat = false;
 
-    // Az adatbázis változásainak elmentéséhez
+    /**
+     * @brief Tracks whether there were any changes made to the database. If it is true, the program will as whether we want to save the changes upon exiting.
+     * 
+     */
     bool valtoztatasVolt = false;
 
     char menupont;
@@ -57,7 +77,7 @@ void menu(FilmTar &filmtomb) {
                 cin >> cim;
                 for (int i = 0; i < filmtomb.getMeret(); ++i) {
                     if(filmtomb.getFilmLista()[i]->getCim() == cim) {
-                        cout << "Ismetlodo filmcim!" << endl;
+                        cout << "\nIsmetlodo filmcim!" << endl;
                         cout << "A folytatashoz nyomjon egy gombot!...\n" << endl;
                         input = getch();
                         clear();
@@ -89,10 +109,10 @@ void menu(FilmTar &filmtomb) {
                         DokumentumFilm *ujFilm = new DokumentumFilm(filmtomb.getMeret() + 1, cim, lejatszIdo, kiadEv, "Dokumentumfilm", leiras);
                         filmtomb.adatbazisHozzaad(ujFilm);
                         valtoztatasVolt = true;
-                        cout << "A film hozza lett adva az adatbazishoz!\nA folytatashoz nyomjon le egy gombot..." << endl;
+                        cout << "\n\nA film hozza lett adva az adatbazishoz!\nA folytatashoz nyomjon le egy gombot..." << endl;
                     }
                     if (input == 'n' or input == 'N') {
-                        cout << "A film nem lett hozzaadva az adatbazishoz!\nA folytatashoz nyomjon le egy gombot..." << endl;
+                        cout << "\n\nA film nem lett hozzaadva az adatbazishoz!\nA folytatashoz nyomjon le egy gombot..." << endl;
                     }
                     input = getch();
                     clear();
@@ -115,10 +135,10 @@ void menu(FilmTar &filmtomb) {
                         CsaladiFilm *ujFilm = new CsaladiFilm(filmtomb.getMeret() + 1, cim, lejatszIdo, kiadEv, "Csaladifilm", korhatar);
                         filmtomb.adatbazisHozzaad(ujFilm);
                         valtoztatasVolt = true;
-                        cout << "A film hozza lett adva az adatbazishoz!\nA folytatashoz nyomjon le egy gombot..." << endl;
+                        cout << "\n\nA film hozza lett adva az adatbazishoz!\nA folytatashoz nyomjon le egy gombot..." << endl;
                     }
                     if (input == 'n' or input == 'N') {
-                        cout << "A film nem lett hozzaadva az adatbazishoz!\nA folytatashoz nyomjon le egy gombot..."
+                        cout << "\n\nA film nem lett hozzaadva az adatbazishoz!\nA folytatashoz nyomjon le egy gombot..."
                              << endl;
                     }
                     input = getch();

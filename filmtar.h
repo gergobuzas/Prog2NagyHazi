@@ -1,6 +1,13 @@
-//
-// Created by buzas on 2022. 04. 24..
-//
+/**
+ * @file filmtar.h
+ * @author Gergo Buzas (buzasgergo0615@gmail.com)
+ * @brief The FilmTar class is the one implementing the heterogenous collection of the different categories of films. It is also managing the data of the database.
+ * @version 0.1
+ * @date 2022-05-13
+ * 
+ * @copyright Copyright (c) 2022
+ * 
+ */
 
 #include "film.h"
 #include "string5.h"
@@ -9,28 +16,73 @@
 #ifndef SKELETON_FILMTAR_H
 #define SKELETON_FILMTAR_H
 
+/**
+ * @brief The class that implements the heterogenous collection 
+ * 
+ */
 class FilmTar{
 private:
     unsigned int meret = 0;
     Film** filmLista = nullptr;
 public:
+    /**
+     * @brief Construct a new Film Tar object
+     * 
+     */
     FilmTar() = default;
 
+    /**
+     * @brief Get the Meret object
+     * 
+     * @return unsigned int 
+     */
     unsigned int getMeret() const{ return meret;}
 
-
+    /**
+     * @brief Get the Film Lista object
+     * 
+     * @return Film** 
+     */
     Film** getFilmLista() {return filmLista;}
-
+    
+    /**
+     * @brief Reads the data from the database txt into a heterogenous collection 
+     * 
+     * @param fajlNev The name of the database file
+     */
     void adatbazisBeolvas(const char *fajlNev);
 
+    /**
+     * @brief Adds a new Film to the heterogenous collection (filmLista). Reallocates the memory every time you add an object. 
+     * 
+     * @param ujFilm The Film object that you want to add to the heterogenous collection
+     */
     void adatbazisHozzaad(Film* ujFilm);
 
+    /**
+     * @brief Removes a Film from the heterogenous collection (filmLista). Reallocates the memory every time you remove an object.
+     * 
+     * @param torlendoFilm 
+     */
     void adatbazisTorol(String& torlendoFilm);
 
+    /**
+     * @brief Writes the 
+     * 
+     * @param fajlNev The output database file (txt)
+     */
     void adatbazisMentes(const char *fajlNev);
 
+    /**
+     * @brief Calls the formazottKiir() function for every single film, that is stored in the heterogenous collection (filmLista). It is nicely styled, and is mostly useful for writing to the standard output.
+     * 
+     */
     void osszesformazottKiir();
 
+    /**
+     * @brief Destroy the Film Tar object
+     * 
+     */
     ~FilmTar(){
         for (unsigned int i = 0; i < meret; ++i) {
             delete(filmLista[i]);
