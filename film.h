@@ -47,9 +47,7 @@ public:
     DokumentumFilm(unsigned int cid, String ccim, unsigned int clejatszIdo, unsigned int ckiadEv,\
     String ckategoria, String cleiras) : Film(cid, ccim, clejatszIdo, ckiadEv, ckategoria), leiras(cleiras){}
 
-    String getLeiras() const { return leiras;}
-
-    std::ostream& formazottKiir(std::ostream& out) const;
+    std::ostream& formazottKiir(std::ostream& out) const override;
 
     std::ostream& kiir(std::ostream& out) const;
 
@@ -63,9 +61,7 @@ public:
     CsaladiFilm(unsigned int cid, String ccim, unsigned int clejatszIdo, unsigned int ckiadEv,\
     String ckategoria, unsigned int ckorhatar) : Film(cid, ccim, clejatszIdo, ckiadEv, ckategoria), korhatar(ckorhatar){}
 
-    unsigned int getKorhatar() const { return korhatar; }
-
-    std::ostream& formazottKiir(std::ostream& out) const;
+    std::ostream& formazottKiir(std::ostream& out) const override;
 
     std::ostream& kiir(std::ostream& out) const;
 

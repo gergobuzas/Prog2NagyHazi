@@ -11,8 +11,8 @@ using std::endl;
 
 int main() {
     FilmTar filmtomb;
-    filmtomb.adatbazisBeolvas("Csaladifilm.txt");
-    filmtomb.adatbazisBeolvas("Dokumentumfilm.txt");
+    filmtomb.adatbazisBeolvas("CsaladiFilm.txt");
+    filmtomb.adatbazisBeolvas("DokumentumFilm.txt");
     menu(filmtomb);
     return 0;
 }

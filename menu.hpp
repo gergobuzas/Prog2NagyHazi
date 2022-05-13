@@ -25,40 +25,53 @@ void clear() {
 #endif
 }
 
-void menu(FilmTar& filmtomb){
+void menu(FilmTar &filmtomb) {
     //Uj film hozzaadasahoz valtozok
     unsigned int lejatszIdo, kiadEv, kategoria, korhatar;
     String cim(""), leiras("");
 
-    char mentes;
+    char input;
 
     //Film torlesehez valtozok
     String torlendo("");
-    bool torolve = false;
+    bool talalat = false;
+
+    // Az adatbázis változásainak elmentéséhez
+    bool valtoztatasVolt = false;
 
     char menupont;
     bool exit = false;
-    while (!exit){
+    while (!exit) {
         cout << "Udvozoljuk a Filmtar adatbazisban\n\n" << endl;
         cout << "1 - Uj film hozzaadasa\n" << endl;
         cout << "2 - Film torlese az adatbazisbol\n" << endl;
         cout << "3 - Filmek lekerdezese\n" << endl;
         cout << "Q - Kilepes\n" << endl;
         menupont = getch();
-        switch(menupont){
+        switch (menupont) {
 
             case '1':
                 clear();
                 cout << "Uj film hozzaadasa\n\n\n" << endl;
                 cout << "Adjon meg egy cimet" << endl;
                 cin >> cim;
+                for (int i = 0; i < filmtomb.getMeret(); ++i) {
+                    if(filmtomb.getFilmLista()[i]->getCim() == cim) {
+                        cout << "Ismetlodo filmcim!" << endl;
+                        cout << "A folytatashoz nyomjon egy gombot!...\n" << endl;
+                        input = getch();
+                        clear();
+                        menu(filmtomb);
+                        return;
+                    }
+                }
                 cout << "Adjon meg egy lejatszasi idot" << endl;
                 cin >> lejatszIdo;
                 cout << "Adjon meg egy kiadasi evet" << endl;
                 cin >> kiadEv;
                 cout << "Adjon meg egy kategoriat\n1 - Dokumentumfilm\n2 - Csaladifilm" << endl;
                 kategoria = getch();
-                if (kategoria == '1'){
+                if (kategoria == '1') {
                     cout << "Adja meg a dokumentumfilm leirasat" << endl;
                     cin >> leiras;
                     clear();
@@ -69,19 +82,22 @@ void menu(FilmTar& filmtomb){
                     cout << "Kategoria: Dokumentumfilm" << endl;
                     cout << "Leiras: " << leiras << endl;
                     cout << "\n\n Szeretne menteni az adatbazisba a megadott adatokat? (Y/N) (I/N)" << endl;
-                    mentes = getch();
-                    if(mentes == 'Y' or mentes == 'y' or mentes =='i' or mentes == 'I'){
-                        DokumentumFilm ujFilm(filmtomb.getMeret() + 1, cim, lejatszIdo, kiadEv, "Dokumentumfilm", leiras);
-                        filmtomb.adatbazisHozzaad(&ujFilm);
+                    while (input != 'y' and input != 'Y' and input != 'i' and input != 'I' and input != 'n' and input != 'N') {
+                        input = getch();
+                    }
+                    if (input == 'Y' or input == 'y' or input == 'i' or input == 'I') {
+                        DokumentumFilm *ujFilm = new DokumentumFilm(filmtomb.getMeret() + 1, cim, lejatszIdo, kiadEv, "Dokumentumfilm", leiras);
+                        filmtomb.adatbazisHozzaad(ujFilm);
+                        valtoztatasVolt = true;
                         cout << "A film hozza lett adva az adatbazishoz!\nA folytatashoz nyomjon le egy gombot..." << endl;
                     }
-                    if(mentes == 'n' or mentes == 'N'){
+                    if (input == 'n' or input == 'N') {
                         cout << "A film nem lett hozzaadva az adatbazishoz!\nA folytatashoz nyomjon le egy gombot..." << endl;
                     }
-                    mentes = getch();
+                    input = getch();
                     clear();
                 }
-                if(kategoria == '2'){
+                if (kategoria == '2') {
                     cout << "Adja meg a csaladifilm korhatarat" << endl;
                     cin >> korhatar;
                     clear();
@@ -92,69 +108,94 @@ void menu(FilmTar& filmtomb){
                     cout << "Kategoria: Dokumentumfilm" << endl;
                     cout << "Korhatar: " << korhatar << endl;
                     cout << "\n\n Szeretne menteni az adatbazisba a megadott adatokat? (Y/N) (I/N)" << endl;
-                    mentes = getch();
-                    if(mentes == 'Y' or mentes == 'y' or mentes =='i' or mentes == 'I'){
-                        CsaladiFilm ujFilm(filmtomb.getMeret() + 1, cim, lejatszIdo, kiadEv, "Csaladifilm", korhatar);
-                        filmtomb.adatbazisHozzaad(&ujFilm);
+                    while (input != 'y' and input != 'Y' and input != 'i' and input != 'I' and input != 'n' and input != 'N') {
+                        input = getch();
+                    }
+                    if (input == 'Y' or input == 'y' or input == 'i' or input == 'I') {
+                        CsaladiFilm *ujFilm = new CsaladiFilm(filmtomb.getMeret() + 1, cim, lejatszIdo, kiadEv, "Csaladifilm", korhatar);
+                        filmtomb.adatbazisHozzaad(ujFilm);
+                        valtoztatasVolt = true;
                         cout << "A film hozza lett adva az adatbazishoz!\nA folytatashoz nyomjon le egy gombot..." << endl;
                     }
-                    if(mentes == 'n' or mentes == 'N'){
-                        cout << "A film nem lett hozzaadva az adatbazishoz!\nA folytatashoz nyomjon le egy gombot..." << endl;
+                    if (input == 'n' or input == 'N') {
+                        cout << "A film nem lett hozzaadva az adatbazishoz!\nA folytatashoz nyomjon le egy gombot..."
+                             << endl;
                     }
-                    mentes = getch();
+                    input = getch();
                     clear();
                 }
                 break;
+
             case '2':
                 clear();
                 cout << "Adja meg a torlendo film cimet" << endl;
                 cin >> torlendo;
                 for (int i = 0; i < filmtomb.getMeret(); ++i) {
-                    if(filmtomb.getFilmLista()[i]->getCim() == torlendo){
+                    if (filmtomb.getFilmLista()[i]->getCim() == torlendo) {
+                        talalat = true;
                         cout << "\n\nKeresett film megtalalva. Adatai:\n\n" << endl;
                         filmtomb.getFilmLista()[i]->formazottKiir(cout);
-                        cout << "\n\nBiztos szeretne torolni az adatbazisbol?" << endl;
-                        mentes = getch();
-                        if(mentes == 'Y' or mentes == 'y' or mentes =='i' or mentes == 'I'){
-                            filmtomb.adatbazisTorol(torlendo);
+                        cout << "\n\nBiztos szeretne torolni az adatbazisbol? (Y/N) (I/N)" << endl;
+                        while (input != 'y' and input != 'Y' and input != 'i' and input != 'I' and input != 'n' and input != 'N') {
+                            input = getch();
                         }
-                        cout << "A film torolve lett az adatbazisbol" << endl;
-                        torolve = true;
-                        mentes = getch();
+                        if (input == 'Y' or input == 'y' or input == 'i' or input == 'I') {
+                            filmtomb.adatbazisTorol(torlendo);
+                            valtoztatasVolt = true;
+                            cout << "\n\nA film torolve lett az adatbazisbol\nA folytatashoz nyomjon meg egy gombot..." << endl;
+                        }
+                        if (input == 'N' or input == 'n') {
+                            cout << "\n\nA film nem lett torolve az adatbazisbol\nA folytatashoz nyomjon meg egy gombot..." << endl;
+                        }
+                        input = getch();
                         clear();
                         break;
                     }
                 }
-                if(!torolve) {
-                    cout << "Ilyen film nem szerepel az adatbazisban\nA folytatashoz nyomjon meg egy gombot..." << endl;
-                    mentes = getch();
+                if (!talalat) {
+                    cout << "\n\nIlyen film nem szerepel az adatbazisban\nA folytatashoz nyomjon meg egy gombot..." << endl;
+                    input = getch();
                     clear();
                 }
                 break;
+
             case '3':
                 clear();
-                for (int i = 0; i < filmtomb.getMeret(); ++i) {
-                    filmtomb.getFilmLista()[i]->formazottKiir(cout);
-                    cout << endl;
-                }
-                cout << "\n\nOsszesen " << filmtomb.getMeret() <<"db film.\n\nA folytatashoz nyomjon le egy gombot..." << endl;
-                mentes = getch();
+                filmtomb.osszesformazottKiir();
+                cout << "\n\nOsszesen " << filmtomb.getMeret() << "db film.\n\nA folytatashoz nyomjon le egy gombot..." << endl;
+                input = getch();
                 clear();
                 break;
+
             case 'q':
             case 'Q':
                 clear();
                 cout << "Biztos ki szeretne lepni a programbol?(Y/N) (I/N)\n" << endl;
                 menupont = getch();
-                if(menupont == 'Y' or menupont == 'y' or menupont == 'I' or menupont == 'i'){
+                if (menupont == 'Y' or menupont == 'y' or menupont == 'I' or menupont == 'i') {
                     exit = true;
                     break;
-                }
-                else if(menupont == 'n' or menupont == 'N')
+                } else if (menupont == 'n' or menupont == 'N')
                     clear();
-                    break;
+                break;
+
             default:
                 clear();
+                break;
+        }
+
+        if (exit and valtoztatasVolt) {
+            cout << "Szeretne menteni az adatbazisban vegrehajtott valtoztatasokat veglegesen? (Y/N) (I/N)" << endl;
+            while (input != 'y' and input != 'Y' and input != 'i' and input != 'I' and input != 'n' and input != 'N') {
+                input = getch();
+            }
+            if (input == 'Y' or input == 'y' or input == 'i' or input == 'I') {
+                filmtomb.adatbazisMentes("DokumentumFilm.txt");
+                filmtomb.adatbazisMentes("CsaladiFilm.txt");
+            } else {
+                cout << "Nem tortent modositas a txt fajlokban. A modositasok elvetve." << endl;
+                input = getch();
+            }
         }
     }
 }

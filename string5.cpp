@@ -28,7 +28,6 @@
 using std::cin;
 using std::ios_base;
 
-/// Konstruktor: egy char karakterből (createStrFromChar)
 String::String(char ch) {
     // Meghatározzuk a hosszát
     len = 1;

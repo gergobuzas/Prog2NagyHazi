@@ -29,7 +29,7 @@ public:
 
     void adatbazisMentes(const char *fajlNev);
 
-    void osszesKiir();
+    void osszesformazottKiir();
 
     ~FilmTar(){
         for (unsigned int i = 0; i < meret; ++i) {

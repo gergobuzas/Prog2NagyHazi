@@ -58,16 +58,12 @@ void FilmTar::adatbazisTorol(String& torlendoFilm){
     unsigned int idx = 0;
     for (int i = 0; i < meret; ++i) {
         if (filmLista[i]->getCim() != torlendoFilm) {
-            *ujFilmLista[idx++] = *filmLista[i];
-            delete filmLista[i];
-        }
-        else{
-            delete filmLista[i];
+            ujFilmLista[idx++] = filmLista[i];
         }
     }
     meret--;
     delete[] filmLista;
-    *filmLista = *ujFilmLista;
+    filmLista = ujFilmLista;
 }
 
 void FilmTar::adatbazisMentes(const char *fajlNev) {
@@ -102,8 +98,10 @@ void FilmTar::adatbazisMentes(const char *fajlNev) {
     myFile.close();
 }
 
-void FilmTar::osszesKiir(){
+void FilmTar::osszesformazottKiir(){
     for (int i = 0; i < meret; ++i) {
-        filmLista[i]->kiir(std::cout);
+        filmLista[i]->formazottKiir(std::cout);
+        std::cout << std::endl;
     }
 }
+
