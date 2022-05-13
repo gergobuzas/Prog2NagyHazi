@@ -60,6 +60,13 @@ public:
     void adatbazisHozzaad(Film* ujFilm);
 
     /**
+     * @brief Allows the user to input data of a film, and add it to the heterogenous collection (filmLista). If the film that the user wants to add is already in the database, than the function is returned.
+     * 
+     * @param valtozasVolt To help us determine, whether we have to write to the database txt upon closing the program to save the changes (only happens when there were changes made, which is determined based on this bool)
+     */
+    void adatbazisHozzaadFelhasznalo(bool& valtozasVolt);
+
+    /**
      * @brief Removes a Film from the heterogenous collection (filmLista). Reallocates the memory every time you remove an object.
      * 
      * @param torlendoFilm 
@@ -67,7 +74,14 @@ public:
     void adatbazisTorol(String& torlendoFilm);
 
     /**
-     * @brief Writes the 
+     * @brief Asks user about which film to delete
+     * 
+     * @param valtozasVolt To help us determine, whether we have to write to the database txt upon closing the program to save the changes (only happens when there were changes made, which is determined based on this bool)
+     */
+    void adatbazisTorolFelhasznalo(bool& valtozasVolt);
+
+    /**
+     * @brief Writes the data of the films into the database txt files
      * 
      * @param fajlNev The output database file (txt)
      */
