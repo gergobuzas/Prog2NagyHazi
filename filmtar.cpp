@@ -24,7 +24,7 @@ void FilmTar::adatbazisBeolvas(const char *fajlNev){
     catch (std::runtime_error& ) {
         String input = "";
         cout << "A(z) " << fajlNev << " fajl megnyitasa nem sikerult!" << endl;
-        cout << "Szeretne letrehozni egy ures adatbazis fajlt?" << endl;
+        cout << "Szeretne letrehozni egy ures adatbazis fajlt? (Y/N)" << endl;
         while(input != "Y" and input != "y" and input != "I" and input != "i" and input != "n" and input != "N"){
             cin >> input;
             cin.clear();
@@ -85,28 +85,76 @@ void FilmTar::adatbazisHozzaadFelhasznalo(bool& valtozasVolt) {
     String lejatszIdo, kiadEv, kategoria = '0', korhatar;
     String cim(""), leiras("");
 
-    char input = 0;
+    char input = '0';
 
     cout << "Uj film hozzaadasa\n\n\n" << endl;
 
-
     cout << "Adjon meg egy cimet" << endl;
-    cin >> cim;
-    for (int i = 0; i < meret; ++i) {
-        if(filmLista[i]->getCim() == cim) {
-            cout << "\nIsmetlodo filmcim!" << endl;
-            cout << "A folytatashoz adjon input betut!...\n" << endl;
-            cin >> input;
-            cin.clear();
-            return;
+    try{
+        cin >> cim ;
+        cin.clear();
+        for (int i = 0; i < meret; ++i) {
+            if(cim == filmLista[i]->getCim())
+                throw std::invalid_argument("Mar letezik ilyen cim a filmtarban.");
         }
     }
-    cout << "Adjon meg egy lejatszasi idot" << endl;
-    cin >> lejatszIdo;
-    cout << "Adjon meg egy kiadasi evet" << endl;
-    cin >> kiadEv;
-    cout << "Adjon meg egy kategoriat\n1 - Dokumentumfilm\n2 - Csaladifilm" << endl;
+    catch (std::invalid_argument&){
+        cout << "\nA megadott cimu film mar letezik az adatbazisban. Egy film csak egyszer szerepelhet az adatbazisban.\n" << endl;
+        cout << "\nA folytatashoz adjon billentyu inputot..." << endl;
+        cin >> input;
+        cin.clear();
+        return;
+    }
 
+
+    LejatszasiIdo:
+    cout << "Adjon meg egy lejatszasi idot" << endl;
+    try{
+        cin >> lejatszIdo;
+        cin.clear();
+        for (int i = 0; i < lejatszIdo.size(); ++i) {
+            if(std::isdigit(lejatszIdo[i]) == 0)
+                throw std::bad_typeid();
+        }
+    }
+    catch (std::bad_typeid&){
+        cout << "\nA megadott lejatszasi ido nem csak szamot tartalmaz. Az adat igy az adatbazisba felvetel soran serulhet." << endl;
+        cout << "Szeretne igy is folytatni, vagy mas adatot szeretne megadni? (Y = Folytatas / N = Mas adat)" << endl;
+        input = '0';
+        while (input != 'y' and input != 'Y' and input != 'i' and input != 'I' and input != 'n' and input != 'N') {
+            cin >> input;
+            cin.clear();
+        }
+        if (input == 'N' or input == 'n'){
+            goto LejatszasiIdo;
+        }
+    }
+
+
+    KiadasiEv:
+    cout << "Adjon meg egy kiadasi evet" << endl;
+    try{
+        cin >> kiadEv;
+        cin.clear();
+        for (int i = 0; i < kiadEv.size(); ++i) {
+            if(std::isdigit(kiadEv[i]) == 0)
+                throw std::bad_typeid();
+        }
+    }
+    catch (std::bad_typeid&){
+        cout << "\nA megadott kiadasi ev nem csak szamot tartalmaz. Az adat igy az adatbazisba felvetel soran serulhet." << endl;
+        cout << "Szeretne igy is folytatni, vagy mas adatot szeretne megadni? (Y = Folytatas / N = Mas adat)" << endl;
+        input = '0';
+        while (input != 'y' and input != 'Y' and input != 'i' and input != 'I' and input != 'n' and input != 'N') {
+            cin >> input;
+            cin.clear();
+        }
+        if (input == 'N' or input == 'n'){
+            goto KiadasiEv;
+        }
+    }
+
+    cout << "Adjon meg egy kategoriat\n1 - Dokumentumfilm\n2 - Csaladifilm" << endl;
     while(kategoria != '1' and kategoria != '2') {
         cin >> kategoria;
         cin.clear();
@@ -123,9 +171,9 @@ void FilmTar::adatbazisHozzaadFelhasznalo(bool& valtozasVolt) {
             cout << "Kiadasi ev: " << kiadEv << endl;
             cout << "Kategoria: Dokumentumfilm" << endl;
             cout << "Leiras: " << leiras << endl;
-            cout << "\n\n Szeretne menteni az adatbazisba a megadott adatokat? (Y/N) (I/N)" << endl;
 
-
+            cout << "\n\nSzeretne menteni az adatbazisba a megadott adatokat? (Y/N) (I/N)" << endl;
+            input = '0';
             while (input != 'y' and input != 'Y' and input != 'i' and input != 'I' and input != 'n' and input != 'N') {
                 cin >> input;
                 cin.clear();
@@ -148,17 +196,39 @@ void FilmTar::adatbazisHozzaadFelhasznalo(bool& valtozasVolt) {
         }
 
         if (kategoria == '2') {
+
+
+            KorHatar:
             cout << "Adja meg a csaladifilm korhatarat" << endl;
-            cin >> korhatar;
+            try{
+                cin >> korhatar;
+                cin.clear();
+                for (int i = 0; i < korhatar.size(); ++i) {
+                    if(std::isdigit(korhatar[i]) == 0)
+                        throw std::bad_typeid();
+                }
+            }
+            catch (std::bad_typeid&){
+                cout << "\nA megadott korhatar nem csak szamot tartalmaz. Az adat igy az adatbazisba felvetel soran serulhet." << endl;
+                cout << "Szeretne igy is folytatni, vagy mas adatot szeretne megadni? (Y = Folytatas / N = Mas adat)" << endl;
+                input = '0';
+                while (input != 'y' and input != 'Y' and input != 'i' and input != 'I' and input != 'n' and input != 'N') {
+                    cin >> input;
+                    cin.clear();
+                }
+                if (input == 'N' or input == 'n'){
+                    goto KorHatar;
+                }
+            }
+
             cout << "\n\nAz On altal megadott adatok:\n" << endl;
             cout << "Cim: " << cim << endl;
             cout << "Lejatszasi ido: " << lejatszIdo << endl;
             cout << "Kiadasi ev: " << kiadEv << endl;
             cout << "Kategoria: Dokumentumfilm" << endl;
             cout << "Korhatar: " << korhatar << endl;
-            cout << "\n\n Szeretne menteni az adatbazisba a megadott adatokat? (Y/N) (I/N)" << endl;
-
-
+            cout << "\n\nSzeretne menteni az adatbazisba a megadott adatokat? (Y/N) (I/N)" << endl;
+            input = '0';
             while (input != 'y' and input != 'Y' and input != 'i' and input != 'I' and input != 'n' and input != 'N') {
                 cin >> input;
                 cin.clear();
@@ -235,9 +305,28 @@ void FilmTar::adatbazisTorolFelhasznalo(bool& valtozasVolt){
 
 void FilmTar::adatbazisMentes(const char *fajlNev) {
     std::ofstream myFile;
-    myFile.open(fajlNev);
-    if (myFile.fail()){
-        throw("Nem sikerult a fajl megnyitasa");
+
+    try {
+        myFile.open(fajlNev);
+        if(myFile.fail()){
+            throw std::runtime_error("Az adatbazis fajl megnyitasa nem sikerult!");
+        }
+    }
+    catch (std::runtime_error& ) {
+        String input = "";
+        cout << "A(z) " << fajlNev << " fajl megnyitasa nem sikerult!" << endl;
+        cout << "Szeretne letrehozni egy ures adatbazis fajlt (amennyiben nem, úgy az adatok elvesznek)? (Y/N)" << endl;
+        while(input != "Y" and input != "y" and input != "I" and input != "i" and input != "n" and input != "N"){
+            cin >> input;
+            cin.clear();
+        }
+        if(input == "Y" or input == "y" or input == "i" or input == "I"){
+            std::ofstream outfile(fajlNev);
+            return;
+        }
+        if(input == 'n' or input == 'N'){
+            throw std::runtime_error("A fajlt nem lehet megnyitni. A program bezarul.");
+        }
     }
 
     unsigned int kategoriadb = 0;

@@ -21,10 +21,8 @@ using std::endl;
 void clearscreen() {
 #if defined _WIN32
     system("cls");
-    //clrscr(); // including header file : conio.h
 #elif defined (__LINUX__) || defined(__gnu_linux__) || defined(__linux__)
     system("clear");
-    //std::cout<< u8"\033[2J\033[1;1H"; //Using ANSI Escape Sequences
 #elif defined (__APPLE__)
     system("clear");
 #endif
@@ -73,6 +71,7 @@ void menu(FilmTar &filmtomb) {
             case 'Q':
                 clearscreen();
                 cout << "Biztos ki szeretne lepni a programbol?(Y/N) (I/N)\n" << endl;
+                input = '0';
                 while (input != 'Y' and input != 'y' and input != 'i' and input != 'I' and input != 'n' and input != 'N'){
                     cin >> input;
                     cin.clear();
@@ -90,7 +89,7 @@ void menu(FilmTar &filmtomb) {
         }
 
         if (exit and valtozasVolt) {
-            input = 0;
+            input = '0';
             cout << "Szeretne menteni az adatbazisban vegrehajtott valtoztatasokat veglegesen? (Y/N) (I/N)" << endl;
             while (input != 'y' and input != 'Y' and input != 'i' and input != 'I' and input != 'n' and input != 'N') {
                 cin >> input;
