@@ -3,6 +3,7 @@
 //
 #include <iostream>
 #include "film.h"
+#include "memtrace.h"
 
 using std::cout;
 using std::endl;
@@ -44,6 +45,7 @@ std::ostream& Film::formazottKiir(std::ostream& out) const{
     cout << "Cim: " << cim << endl;
     cout << "Lejatszasi ido: " << lejatszIdo << endl;
     cout << "Kiadasi ev: " << kiadEv << endl;
+    return cout;
 }
 
 std::ostream& DokumentumFilm::formazottKiir(std::ostream& out) const{

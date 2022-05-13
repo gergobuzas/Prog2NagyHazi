@@ -4,10 +4,11 @@
 #include "menu.hpp"
 #include "gtest_lite.h"
 #include "string5.h"
+#include "memtrace.h"
+
 using std::cout;
 using std::cin;
 using std::endl;
-
 
 int main() {
     FilmTar filmtomb;

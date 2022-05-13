@@ -9,7 +9,6 @@
  * 
  */
 #include <iostream>
-#include "conio.h"
 #include "string5.h"
 
 using std::cout;
@@ -48,7 +47,8 @@ void menu(FilmTar &filmtomb) {
         cout << "2 - Film torlese az adatbazisbol\n" << endl;
         cout << "3 - Filmek lekerdezese\n" << endl;
         cout << "Q - Kilepes\n" << endl;
-        input = getch();
+        cin >> input;
+        cin.clear();
         switch (input) {
 
             case '1':
@@ -64,7 +64,8 @@ void menu(FilmTar &filmtomb) {
             case '3':
                 clearscreen();
                 filmtomb.osszesformazottKiir();
-                input = getch();
+                cin >> input;
+                cin.clear();
                 clearscreen();
                 break;
 
@@ -72,7 +73,10 @@ void menu(FilmTar &filmtomb) {
             case 'Q':
                 clearscreen();
                 cout << "Biztos ki szeretne lepni a programbol?(Y/N) (I/N)\n" << endl;
-                input = getch();
+                while (input != 'Y' and input != 'y' and input != 'i' and input != 'I' and input != 'n' and input != 'N'){
+                    cin >> input;
+                    cin.clear();
+                }
                 if (input == 'Y' or input == 'y' or input == 'I' or input == 'i') {
                     exit = true;
                     break;
@@ -89,14 +93,16 @@ void menu(FilmTar &filmtomb) {
             input = 0;
             cout << "Szeretne menteni az adatbazisban vegrehajtott valtoztatasokat veglegesen? (Y/N) (I/N)" << endl;
             while (input != 'y' and input != 'Y' and input != 'i' and input != 'I' and input != 'n' and input != 'N') {
-                input = getch();
+                cin >> input;
+                cin.clear();
             }
             if (input == 'Y' or input == 'y' or input == 'i' or input == 'I') {
                 filmtomb.adatbazisMentes("DokumentumFilm.txt");
                 filmtomb.adatbazisMentes("CsaladiFilm.txt");
             } else {
-                cout << "Nem tortent modositas a txt fajlokban. A modositasok elvetve." << endl;
-                input = getch();
+                cout << "Nem tortent modositas a txt fajlokban. A modositasok elvetve.\n A bezarashoz adjon input betut!" << endl;
+                cin >> input;
+                cin.clear();
             }
         }
     }
