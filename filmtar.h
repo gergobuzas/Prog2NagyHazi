@@ -97,12 +97,7 @@ public:
      * @brief Destroy the Film Tar object
      * 
      */
-    ~FilmTar(){
-        for (unsigned int i = 0; i < meret; ++i) {
-            delete(filmLista[i]);
-        }
-        delete[] filmLista;
-    }
+    ~FilmTar();
 };
 
 

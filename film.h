@@ -87,6 +87,8 @@ public:
      * @return std::ostream& 
      */
     virtual std::ostream& kiir(std::ostream& out) const;
+
+    virtual ~Film(){}
 };
 
 /**
@@ -105,6 +107,13 @@ public:
     String ckategoria, String cleiras) : Film(cid, ccim, clejatszIdo, ckiadEv, ckategoria), leiras(cleiras){}
 
     /**
+     * @brief Get the Leiras object
+     *
+     * @return String
+     */
+    String getLeiras(){return leiras;}
+
+    /**
      * @brief An output function. The datas are nicely styled. Comes in handy for printing to the standard output
      * 
      * @param out Where the data is written to
@@ -119,6 +128,8 @@ public:
      * @return std::ostream& 
      */
     std::ostream& kiir(std::ostream& out) const;
+
+    ~DokumentumFilm(){}
 };
 
 /**
@@ -136,6 +147,8 @@ public:
     CsaladiFilm(unsigned int cid, String ccim, unsigned int clejatszIdo, unsigned int ckiadEv,\
     String ckategoria, unsigned int ckorhatar) : Film(cid, ccim, clejatszIdo, ckiadEv, ckategoria), korhatar(ckorhatar){}
 
+    unsigned int getKorhatar(){ return korhatar; }
+
     /**
      * @brief An output function. The datas are nicely styled. Comes in handy for printing to the standard output
      * 
@@ -152,6 +165,7 @@ public:
      */
     std::ostream& kiir(std::ostream& out) const;
 
+    ~CsaladiFilm() {}
 };
 
 #endif //SKELETON_FILM_H

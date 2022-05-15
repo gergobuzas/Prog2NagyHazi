@@ -1,0 +1,1 @@
+/usr/bin/c++  -g  -static CMakeFiles/Skeleton.dir/main.cpp.o CMakeFiles/Skeleton.dir/memtrace.cpp.o CMakeFiles/Skeleton.dir/string5.cpp.o CMakeFiles/Skeleton.dir/filmtar.cpp.o CMakeFiles/Skeleton.dir/film.cpp.o  -o Skeleton 

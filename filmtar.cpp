@@ -47,7 +47,7 @@ void FilmTar::adatbazisBeolvas(const char *fajlNev){
 
 
     myFile >> dbAdat;
-    for (int i = 0; i < dbAdat; ++i) {
+    for (unsigned int i = 0; i < dbAdat; ++i) {
         myFile >> id;
         myFile >> filmCim;
         myFile >> lejatszIdo;
@@ -55,12 +55,12 @@ void FilmTar::adatbazisBeolvas(const char *fajlNev){
         myFile >> kategoria;
         if (kategoria == "Dokumentumfilm"){
             myFile >> leiras;
-            DokumentumFilm* hozzaadando = new DokumentumFilm (id, filmCim, lejatszIdo, kiadEv, kategoria, leiras);
+            DokumentumFilm* hozzaadando = new DokumentumFilm(id, filmCim, lejatszIdo, kiadEv, kategoria, leiras);
             adatbazisHozzaad(hozzaadando);
         }
         else if (kategoria == "Csaladifilm"){
             myFile >> korhatar;
-            CsaladiFilm* hozzaadando = new CsaladiFilm (id, filmCim, lejatszIdo, kiadEv, kategoria, korhatar);
+            CsaladiFilm* hozzaadando = new CsaladiFilm(id, filmCim, lejatszIdo, kiadEv, kategoria, korhatar);
             adatbazisHozzaad(hozzaadando);
         }
     }
@@ -69,7 +69,7 @@ void FilmTar::adatbazisBeolvas(const char *fajlNev){
 
 
 
-void FilmTar::adatbazisHozzaad(Film *ujFilm) {
+void FilmTar::adatbazisHozzaad(Film* ujFilm) {
     Film** ujFilmLista = new Film*[meret+1];
     for (unsigned int i = 0; i < meret; ++i) {
         ujFilmLista[i] = filmLista[i];
@@ -93,7 +93,7 @@ void FilmTar::adatbazisHozzaadFelhasznalo(bool& valtozasVolt) {
     try{
         cin >> cim ;
         cin.clear();
-        for (int i = 0; i < meret; ++i) {
+        for (unsigned int i = 0; i < meret; ++i) {
             if(cim == filmLista[i]->getCim())
                 throw std::invalid_argument("Mar letezik ilyen cim a filmtarban.");
         }
@@ -112,7 +112,7 @@ void FilmTar::adatbazisHozzaadFelhasznalo(bool& valtozasVolt) {
     try{
         cin >> lejatszIdo;
         cin.clear();
-        for (int i = 0; i < lejatszIdo.size(); ++i) {
+        for (unsigned int i = 0; i < lejatszIdo.size(); ++i) {
             if(std::isdigit(lejatszIdo[i]) == 0)
                 throw std::bad_typeid();
         }
@@ -136,7 +136,7 @@ void FilmTar::adatbazisHozzaadFelhasznalo(bool& valtozasVolt) {
     try{
         cin >> kiadEv;
         cin.clear();
-        for (int i = 0; i < kiadEv.size(); ++i) {
+        for (unsigned int i = 0; i < kiadEv.size(); ++i) {
             if(std::isdigit(kiadEv[i]) == 0)
                 throw std::bad_typeid();
         }
@@ -203,7 +203,7 @@ void FilmTar::adatbazisHozzaadFelhasznalo(bool& valtozasVolt) {
             try{
                 cin >> korhatar;
                 cin.clear();
-                for (int i = 0; i < korhatar.size(); ++i) {
+                for (unsigned int i = 0; i < korhatar.size(); ++i) {
                     if(std::isdigit(korhatar[i]) == 0)
                         throw std::bad_typeid();
                 }
@@ -253,9 +253,12 @@ void FilmTar::adatbazisHozzaadFelhasznalo(bool& valtozasVolt) {
 void FilmTar::adatbazisTorol(String& torlendoFilm){
     Film** ujFilmLista = new Film*[meret-1];
     unsigned int idx = 0;
-    for (int i = 0; i < meret; ++i) {
-        if (filmLista[i]->getCim() != torlendoFilm) {
+    for (unsigned int i = 0; i < meret; i++) {
+        if (strcmp(filmLista[i]->getCim().c_str(), torlendoFilm.c_str()) != 0) {
             ujFilmLista[idx++] = filmLista[i];
+        }
+        else{
+            delete filmLista[i];
         }
     }
     meret--;
@@ -270,7 +273,7 @@ void FilmTar::adatbazisTorolFelhasznalo(bool& valtozasVolt){
 
     cout << "Adja meg a torlendo film cimet" << endl;
     cin >> torlendo;
-    for (int i = 0; i < meret; ++i) {
+    for (unsigned int i = 0; i < meret; ++i) {
         if (filmLista[i]->getCim() == torlendo) {
             talalat = true;
             cout << "\n\nKeresett film megtalalva. Adatai:\n\n" << endl;
@@ -330,7 +333,7 @@ void FilmTar::adatbazisMentes(const char *fajlNev) {
     }
 
     unsigned int kategoriadb = 0;
-    for (int i = 0; i < meret; ++i){
+    for (unsigned int i = 0; i < meret; ++i){
         if (strcmp(fajlNev, "DokumentumFilm.txt") == 0){
             if (filmLista[i]->getKategoria() == "Dokumentumfilm")
                 kategoriadb++;
@@ -343,7 +346,7 @@ void FilmTar::adatbazisMentes(const char *fajlNev) {
 
     myFile << kategoriadb;
     myFile << "\n";
-    for (int i = 0; i < meret; ++i) {
+    for (unsigned int i = 0; i < meret; ++i) {
         if (!strcmp(fajlNev, "DokumentumFilm.txt") && filmLista[i]->getKategoria() == "Dokumentumfilm"){
             filmLista[i]->kiir(myFile);
         }
@@ -355,11 +358,18 @@ void FilmTar::adatbazisMentes(const char *fajlNev) {
 }
 
 void FilmTar::osszesformazottKiir(){
-    for (int i = 0; i < meret; ++i) {
+    for (unsigned int i = 0; i < meret; ++i) {
         filmLista[i]->formazottKiir(std::cout);
         std::cout << std::endl;
     }
 
     cout << "\n\nOsszesen " << meret << "db film.\n\nA folytatashoz adjon input betut..." << endl;
+}
+
+FilmTar::~FilmTar(){
+    for (unsigned int i = 0; i < meret; ++i) {
+        delete filmLista[i];
+    }
+    delete[] filmLista;
 }
 

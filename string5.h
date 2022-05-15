@@ -25,6 +25,11 @@ public:
 
     ~String() { delete[] pData; }
 
+    void printDbg(const char *txt = "") const {
+        std::cout << txt << "[" << len << "], "
+                  << (pData ? pData : "(NULL)") << std::endl;
+    }
+
     String& operator=(const String& rhs_s);
 
     String& operator+=(const String& rhs_s) {
@@ -34,7 +39,7 @@ public:
 
     bool operator==(const String& rhs_s) {
         if (len == rhs_s.size()){
-            for (int i = 0; i < len; ++i) {
+            for (unsigned int i = 0; i < len; ++i) {
                 if (pData[i] != rhs_s[i]){
                     return false;
                 }
@@ -46,7 +51,7 @@ public:
 
     bool operator!=(const String& rhs_s) {
         if (len == rhs_s.size()){
-            for (int i = 0; i < len; ++i) {
+            for (unsigned int i = 0; i < len; ++i) {
                 if (pData[i] == rhs_s[i]){
                     return false;
                 }

@@ -50,24 +50,35 @@ cmake_ninja_workdir = D$:/Egyetem/Prog2/NHF/Skeleton/cmake-build-debug/
 build cmake_object_order_depends_target_Skeleton: phony || CMakeFiles/Skeleton.dir
 
 build CMakeFiles/Skeleton.dir/main.cpp.obj: CXX_COMPILER__Skeleton_Debug D$:/Egyetem/Prog2/NHF/Skeleton/main.cpp || cmake_object_order_depends_target_Skeleton
+  DEFINES = -DMEMTRACE
   DEP_FILE = CMakeFiles\Skeleton.dir\main.cpp.obj.d
   FLAGS = -g -std=gnu++11
   OBJECT_DIR = CMakeFiles\Skeleton.dir
   OBJECT_FILE_DIR = CMakeFiles\Skeleton.dir
 
+build CMakeFiles/Skeleton.dir/memtrace.cpp.obj: CXX_COMPILER__Skeleton_Debug D$:/Egyetem/Prog2/NHF/Skeleton/memtrace.cpp || cmake_object_order_depends_target_Skeleton
+  DEFINES = -DMEMTRACE
+  DEP_FILE = CMakeFiles\Skeleton.dir\memtrace.cpp.obj.d
+  FLAGS = -g -std=gnu++11
+  OBJECT_DIR = CMakeFiles\Skeleton.dir
+  OBJECT_FILE_DIR = CMakeFiles\Skeleton.dir
+
 build CMakeFiles/Skeleton.dir/string5.cpp.obj: CXX_COMPILER__Skeleton_Debug D$:/Egyetem/Prog2/NHF/Skeleton/string5.cpp || cmake_object_order_depends_target_Skeleton
+  DEFINES = -DMEMTRACE
   DEP_FILE = CMakeFiles\Skeleton.dir\string5.cpp.obj.d
   FLAGS = -g -std=gnu++11
   OBJECT_DIR = CMakeFiles\Skeleton.dir
   OBJECT_FILE_DIR = CMakeFiles\Skeleton.dir
 
 build CMakeFiles/Skeleton.dir/filmtar.cpp.obj: CXX_COMPILER__Skeleton_Debug D$:/Egyetem/Prog2/NHF/Skeleton/filmtar.cpp || cmake_object_order_depends_target_Skeleton
+  DEFINES = -DMEMTRACE
   DEP_FILE = CMakeFiles\Skeleton.dir\filmtar.cpp.obj.d
   FLAGS = -g -std=gnu++11
   OBJECT_DIR = CMakeFiles\Skeleton.dir
   OBJECT_FILE_DIR = CMakeFiles\Skeleton.dir
 
 build CMakeFiles/Skeleton.dir/film.cpp.obj: CXX_COMPILER__Skeleton_Debug D$:/Egyetem/Prog2/NHF/Skeleton/film.cpp || cmake_object_order_depends_target_Skeleton
+  DEFINES = -DMEMTRACE
   DEP_FILE = CMakeFiles\Skeleton.dir\film.cpp.obj.d
   FLAGS = -g -std=gnu++11
   OBJECT_DIR = CMakeFiles\Skeleton.dir
@@ -81,8 +92,9 @@ build CMakeFiles/Skeleton.dir/film.cpp.obj: CXX_COMPILER__Skeleton_Debug D$:/Egy
 #############################################
 # Link the executable Skeleton.exe
 
-build Skeleton.exe: CXX_EXECUTABLE_LINKER__Skeleton_Debug CMakeFiles/Skeleton.dir/main.cpp.obj CMakeFiles/Skeleton.dir/string5.cpp.obj CMakeFiles/Skeleton.dir/filmtar.cpp.obj CMakeFiles/Skeleton.dir/film.cpp.obj
+build Skeleton.exe: CXX_EXECUTABLE_LINKER__Skeleton_Debug CMakeFiles/Skeleton.dir/main.cpp.obj CMakeFiles/Skeleton.dir/memtrace.cpp.obj CMakeFiles/Skeleton.dir/string5.cpp.obj CMakeFiles/Skeleton.dir/filmtar.cpp.obj CMakeFiles/Skeleton.dir/film.cpp.obj
   FLAGS = -g
+  LINK_FLAGS = -static
   LINK_LIBRARIES = -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
   OBJECT_DIR = CMakeFiles\Skeleton.dir
   POST_BUILD = cd .
